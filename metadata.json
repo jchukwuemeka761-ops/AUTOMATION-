@@ -1,0 +1,6 @@
+{
+  "name": "SYNAPSE AI Workforce OS - $50k Enterprise Multi-Agent System",
+  "description": "Enterprise-grade autonomous AI multi-agent workforce platform replacing 100+ FTEs across Customer Support, Sales, Supply Chain, Finance, QA, and HR with real-time swarm orchestration, HITL governance, and 5,000%+ ROI calculator.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
