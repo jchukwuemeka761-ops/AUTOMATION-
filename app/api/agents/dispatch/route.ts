@@ -76,15 +76,25 @@ Provide a valid JSON response with EXACTLY this structure:
 }
 Include 4 to 6 detailed chronological steps demonstrating multi-agent coordination. Return JSON only, no markdown backticks.`;
 
-        const response = await ai.models.generateContent({
-          model: 'gemini-2.5-flash',
-          contents: prompt,
-          config: {
-            responseMimeType: 'application/json',
-          },
-        });
+        const candidateModels = ['gemini-3.8-flash', 'gemini-3.5-flash'];
+        let response = null;
 
-        if (response.text) {
+        for (const candidate of candidateModels) {
+          try {
+            response = await ai.models.generateContent({
+              model: candidate,
+              contents: prompt,
+              config: {
+                responseMimeType: 'application/json',
+              },
+            });
+            if (response && response.text) break;
+          } catch (modelErr) {
+            console.warn(`Model ${candidate} failed, attempting next candidate:`, modelErr);
+          }
+        }
+
+        if (response && response.text) {
           const parsed = JSON.parse(response.text);
           return NextResponse.json({
             taskId,
